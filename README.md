@@ -110,3 +110,12 @@ The rules are a starting point, not a compiler. A clean report means "worth tryi
 ## License
 
 Apache-2.0
+
+## Sources for the replacements
+
+- QNX Everywhere porting guide, [system call replacement matrix](https://www.qnx.com/developers/docs/qnxeverywhere/com.qnx.doc.qpg/topic/porting_Sys_call_replacement.html): epoll → ionotify(), timerfd → timer + SIGEV_PULSE, inotify → resource manager / fsevmgr, fork → spawn().
+- QNX 8.0 [io-sock migration guide](https://qnx.com/developers/docs/8.0/com.qnx.doc.qnxsdp.migration/topic/migrate_app.html): applications link against libsocket.so.
+- QNX 8.0 [inotify_init()](https://qnx.com/developers/docs/8.0/com.qnx.doc.neutrino.lib_ref/topic/i/inotify_init.html) and [filesystem events](https://qnx.com/developers/docs/8.0/com.qnx.doc.neutrino.sys_arch/topic/fsys_events.html).
+- [ThreadCtl()](https://www.qnx.com/developers/docs/6.6.0.update/com.qnx.doc.neutrino.lib_ref/topic/t/threadctl.html) (`_NTO_TCTL_RUNMASK`) and [pthread_setname_np()](https://www.qnx.com/developers/docs/7.0.0/com.qnx.doc.neutrino.lib_ref/topic/p/pthread_setname_np.html).
+
+Rules marked *warning* are the ones where QNX behaviour depends on the target image or library version; run with `QNX_TARGET` set to confirm against your SDP.
