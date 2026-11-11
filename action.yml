@@ -1,0 +1,35 @@
+name: qnx-port-check
+description: Find Linux-only code that breaks QNX 8.0 builds and report it as code-scanning alerts
+branding:
+  icon: cpu
+  color: red
+inputs:
+  path:
+    description: Directory to scan
+    default: "."
+  fail-on:
+    description: error, warning or never
+    default: never
+  upload-sarif:
+    description: Upload results to GitHub code scanning
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - shell: bash
+      run: pip install "${{ github.action_path }}"
+    - shell: bash
+      run: |
+        qnx-port-check scan "${{ inputs.path }}" -f sarif -o qnx-port-check.sarif --fail-on never
+        qnx-port-check scan "${{ inputs.path }}" -f md -o qnx-port-check.md --fail-on never
+        cat qnx-port-check.md >> "$GITHUB_STEP_SUMMARY"
+    - if: inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: qnx-port-check.sarif
+        category: qnx-port-check
+    - shell: bash
+      run: qnx-port-check scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --no-color

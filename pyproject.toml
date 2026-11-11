@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qnx-port-check"
+version = "0.1.0"
+description = "Find what stops a Linux C/C++ project from building and running on QNX 8.0"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.8"
+keywords = ["qnx", "porting", "embedded", "static-analysis", "rtos"]
+
+[project.scripts]
+qnx-port-check = "qnx_port_check.cli:main"
+
+[tool.setuptools]
+packages = ["qnx_port_check"]

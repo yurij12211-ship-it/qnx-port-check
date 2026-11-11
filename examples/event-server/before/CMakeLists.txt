@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(echo_server C)
+add_executable(echo-server server.c)
+target_compile_options(echo-server PRIVATE -march=native)
+target_link_libraries(echo-server rt pthread)
