@@ -3,6 +3,7 @@
 **Project:** qnx-port-check
 **Category:** Developer Tooling & Host Tools
 **Bonus:** Best Codelab / Tutorial — [docs/codelab.md](codelab.md)
+**Video:** https://youtu.be/D5b6wVY39Y0
 **Repo:** https://github.com/yurij12211-ship-it/qnx-port-check (Apache-2.0)
 **QNX version / target / toolchain:** QNX SDP 8.0; host tool runs on Linux, macOS or Windows with Python 3.8+; analyzes code targeting QNX 8.0 (aarch64le, x86_64) and generates a CMake toolchain for qcc/q++.
 
